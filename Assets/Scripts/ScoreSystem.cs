@@ -12,8 +12,23 @@ public class ScoreSystem : MonoBehaviour
 
     private float _score;
 
+    private GameObject car;
+
+    private bool moving;
+
+    private void Start() 
+    {
+        GameObject obj = GameObject.Find("Canvas");
+        car = GameObject.Find("Car");
+    }
+
     void Update()
     {
+        moving = car.GetComponent<Car>().IsMoving();
+        if(!moving)
+        {
+            return;
+        }
         _score += Time.deltaTime * _scoreMultiplier;
         _scoreText.text = Mathf.FloorToInt(_score).ToString();
     }

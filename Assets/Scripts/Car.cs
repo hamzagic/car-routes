@@ -11,8 +11,14 @@ public class Car : MonoBehaviour
 
     private int _steerValue;
 
+    private bool _isMoving = false;
+
     void Update()
     {
+        if(!_isMoving)
+        {
+            return;
+        }
         _speed += _speedGainPerSecond * Time.deltaTime;
         transform.Rotate(0f, _turnSpeed * _steerValue * Time.deltaTime, 0f);
         transform.Translate(Vector3.forward * _speed * Time.deltaTime);
@@ -29,5 +35,15 @@ public class Car : MonoBehaviour
     public void Steer(int value)
     {
         _steerValue = value;
+    }
+
+    public void TogglePlay()
+    {
+        _isMoving = !_isMoving;
+    }
+
+    public bool IsMoving()
+    {
+        return _isMoving;
     }
 }
